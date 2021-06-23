@@ -15,7 +15,7 @@ disableScrolling() <- disables Scrolling
 enableScrolling() <- enables Scrolling
 BigAlertDissapears() <- Regulates when the Big Alert Div dissapears
 */
-var cssfile = "alert.css";
+var cssfile = "dev-alert.css";
 //Create all Elements used in functions
 let div = document.createElement('div');
 div.classList.add('small_alert');
@@ -79,11 +79,13 @@ function BigAlert(title, val, color, textcolor) {
     //Display Box with Okey option
     button.innerHTML = "Okey";
     button.style.display = "block";
+    button.style.backgroundColor = textcolor;
+    button.style.color = color;
     let big_alert = document.getElementById("big_alert");
     big_alert.innerHTML = "<h1>"+title+"</h1>"+val+big_alert.innerHTML;
     big_alert.style.backgroundColor = color;
     big_alert.style.color = textcolor;
-    big_alert.style.display = "block"
+    big_alert.style.display = "block";
     disableScrolling();
 }
 
