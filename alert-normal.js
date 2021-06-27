@@ -49,12 +49,22 @@ function BigAlertDissapear() {
     big_alert.style.display = "none";
     enableScrolling();
 }
-function Nofify(value) {
+function Notify(value) {
     SmallAlert(value, '#5a5a5aa1', 'white', 5);
 }
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ 
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ 
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+
+      '(\\#[-a-z\\d_]*)?$','i');
+    return !!pattern.test(str);
+}
+
 
 //MAIN
-function SmallAlert(val, color, textcolor, duration) {
+function SmallAlert(val, color, textcolor, duration, target) {
         duration = duration*1000;
         let small_alert = document.getElementById("small_alert");
         small_alert.innerHTML = val;
@@ -63,6 +73,21 @@ function SmallAlert(val, color, textcolor, duration) {
         small_alert.style.backgroundColor = color;
         small_alert.style.color = textcolor;
         small_alert.addEventListener("click", function() {
+            if(target != undefined) {
+                if(validURL(target) == true) {
+                    window.location.href = target;
+                } else {
+                    let targetarray = target.split("(");
+                    let args = targetarray[1].split(")");
+                    let arguments = args[0].split(", ");
+                    if(typeof window[targetarray[0]] == 'function') {
+                        window[targetarray[0]](arguments);
+                    } else {
+                        console.warn(targetarray[0]+" is not defined");
+                    }
+                }
+            }
+
             small_alert.classList.remove("small_alert_displayed");
             small_alert.classList.add("small_alert");
         });
