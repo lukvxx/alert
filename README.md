@@ -1,5 +1,6 @@
 # Alert
 JS for good looking alert box
+![image](https://user-images.githubusercontent.com/44476930/123536526-02794680-d72b-11eb-9ffa-300d4b7b7954.png)
 
 Usage:
 
